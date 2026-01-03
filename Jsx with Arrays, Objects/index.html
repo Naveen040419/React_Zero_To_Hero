@@ -23,6 +23,7 @@
 
     <script type = "text/babel">
 
+        // Array of car brands for demonstration...
         const arr1= [ "BMW", "Audi", "Mercedes", "Ferrari" ];
 
         function App(){
@@ -32,15 +33,60 @@
             <h1> Jsx with Arrays and Objects </h1>
             <ul>
 
-            { arr1.map( ( car) => <li> {car} </li> )}
+            {arr1.map((car)=><li key = {car}> {car} </li> )}
 
             </ul>    
             </>
         );
         }
 
+
+        // Student information using object....
+
+        const studentData = [ 
+            { name: "John", age: 20, course: "MERN" }, 
+            { name: "Alice", age: 22, course: "MEAN" }, 
+            { name: "Bob", age: 21, course: "Full Stack" }
+        ];
+
+        function StudentList(){
+            return( 
+                <>
+                <h1> Student Data Table </h1>
+
+                <table> 
+                    <tr>
+                    <th> Name </th>
+                    <th> Age </th>
+                    <th> Course </th>
+                    </tr>
+
+                    <tr> 
+                    <td> {studentData[0].name} </td>
+                    <td> {studentData[0].age} </td>
+                    <td> {studentData[0].course} </td>
+                    </tr>
+
+                    <tr> 
+                    <td> {studentData[1].name} </td>
+                    <td> {studentData[1].age} </td>
+                    <td> {studentData[1].course} </td>
+                    </tr>
+
+                     <tr> 
+                    <td> {studentData[2].name} </td>
+                    <td> {studentData[2].age} </td>
+                    <td> {studentData[2].course} </td>
+                    </tr>
+
+                </table>
+                </>
+            )
+        }
+
+
         const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render( <App /> );
+        root.render( <> <App/> <StudentList/> </> );
     </script>
     
 </body>
