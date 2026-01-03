@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Babel standalone -->
+
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- React -->
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+
+   <!-- React DOM -->
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+
+    <div id = "root">
+
+    </div>
+
+    <script type = "text/babel">
+
+        // Any valid expression is jsx calling by -> {}
+        // Function expression..
+
+        function Sum(){
+            let a = 10;
+            let b = 20;
+            return(
+                <>
+                <p> The sum of two number is : {a+b} </p>
+                </>
+            )
+        }
+
+        // JSx expression...
+
+        const header = <h2> This is JSX expression </h2>;
+
+
+        // Array and Objects in JSX
+
+        const arr1 = [ "Falak", "is", "a", "Teacher" ];
+
+        const obj1 = {
+            id : 1,
+            "name" : "falak",
+            "age" : 21
+        }
+
+        function App(){
+
+            let name = "Falak Chadani";
+            let age = 21;
+            let demo = null;
+            let undefinedLet = undefined;
+            let booleanLet = true;
+            return(
+                <>
+                <h1> Lets Start with JSX with {name} and 
+                    age is {age} and demo is {demo}!
+                    {undefinedLet} and {booleanLet}  
+                </h1>
+                {header}
+
+                { Sum()}
+                <Sum/>
+
+                {/* <h3> Array is : {arr1.join(" ")} </h3>
+                
+                we don't use for loop in jsx instead we use map function
+                
+                */}
+
+                <h3> Array is : {arr1.map( (item) => item + " " )} </h3>
+                <h3> Object is : {obj1.name} </h3>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot( document.getElementById("root")).render( <App/>);
+    </script>
+    
+</body>
+</html>
