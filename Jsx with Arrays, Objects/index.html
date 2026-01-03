@@ -55,17 +55,21 @@
                 <h1> Student Data Table </h1>
 
                 <table> 
+                    <thead>
                     <tr>
                     <th> Name </th>
                     <th> Age </th>
                     <th> Course </th>
                     </tr>
+                    </thead>
 
+                    <tbody>
                     <tr> 
                     <td> {studentData[0].name} </td>
                     <td> {studentData[0].age} </td>
                     <td> {studentData[0].course} </td>
                     </tr>
+                    
 
                     <tr> 
                     <td> {studentData[1].name} </td>
@@ -73,11 +77,35 @@
                     <td> {studentData[1].course} </td>
                     </tr>
 
-                     <tr> 
+                    <tr> 
                     <td> {studentData[2].name} </td>
                     <td> {studentData[2].age} </td>
                     <td> {studentData[2].course} </td>
                     </tr>
+                    </tbody>
+
+                </table>
+
+                <h2> Student Table using map() function </h2>
+
+                <table> 
+                    <thead>
+                    <tr>
+                    <th> Name </th>
+                    <th> Age </th>
+                    <th> Course </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        { studentData.map( (student) => 
+                            <tr> 
+                            <td> {student.name} </td>
+                            <td> {student.age} </td>
+                            <td> {student.course} </td>
+                            </tr>
+                        )}
+                    </tbody>
 
                 </table>
                 </>
