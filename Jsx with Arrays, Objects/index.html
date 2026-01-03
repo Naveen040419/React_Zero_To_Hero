@@ -98,8 +98,8 @@
                     </thead>
 
                     <tbody>
-                        { studentData.map( (student) => 
-                            <tr> 
+                        { studentData.map( (student, index) => 
+                            <tr key={index}> 
                             <td> {student.name} </td>
                             <td> {student.age} </td>
                             <td> {student.course} </td>
