@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Link for stylesheet -->
+   <link rel = "stylesheet" href="index.css"/>
+
+    <!-- Babel standalone -->
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- React -->
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+
+   <!-- React DOM -->
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+
+    <div id="root">
+
+    </div>
+
+    <script type = "text/babel">
+
+    const carDetails = [
+
+        { image : "./Screenshot_2025-12-30-11-00-14-27_db2300be643d553259cbc11cd691d2a5.jpg", Name : "BMW", Average : 10},
+        { image : "./Screenshot_2025-12-30-11-00-14-27_db2300be643d553259cbc11cd691d2a5.jpg", Name : "Audi", Average : 12},
+        { image : "./Screenshot_2025-12-30-11-00-14-27_db2300be643d553259cbc11cd691d2a5.jpg", Name : "Nexa", Average : 18}
+    ]
+
+    function CarPage(){
+        return(
+            <>
+            <h1> Car Details Table </h1>
+            <table>
+                <thead> 
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Average</th>
+                </tr> 
+                </thead>
+
+                <tbody>
+                { carDetails.map( (car) => 
+                    <tr key = {car.Name}> 
+                        <td><img src={car.image}/> </td>
+                        <td>{car.Name}</td>
+                        <td>{car.Average}</td>
+                    </tr>    
+                )}
+                </tbody>
+            </table>
+            </>
+        )
+    }
+
+    // Student information using object....
+
+        const studentData = [ 
+            { name: "John", age: 20, course: "MERN" }, 
+            { name: "Alice", age: 22, course: "MEAN" }, 
+            { name: "Bob", age: 21, course: "Full Stack" }
+        ];
+
+        function StudentList(){
+            return( 
+                <>
+                <h1> Student Data Table </h1>
+
+                <table> 
+                    <thead>
+                    <tr>
+                    <th> Name </th>
+                    <th> Age </th>
+                    <th> Course </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        { studentData.map( (student, index) => 
+                            <tr key={index}> 
+                            <td> {student.name} </td>
+                            <td> {student.age} </td>
+                            <td> {student.course} </td>
+                            </tr>
+                        )}
+                    </tbody>
+
+                </table>
+                </>
+            )
+        }
+
+
+    // Conditional Rendering of Components....
+    // Ternary Operator....
+    // Logical and && Operator....
+    // Logical or || Operator
+
+    function App(){
+
+        let showCars = false;
+
+        let firstName = "Alexa";
+        let lastName = "Smith";
+
+        let loggedIn = true;
+
+        if( showCars ){
+            return <CarPage/>
+        }
+
+        return(
+            <>
+            <h1> Hello { loggedIn ? lastName || firstName : "User" } </h1>
+
+            {loggedIn && <p> Welcome to the React world </p>}
+
+            {loggedIn || <p> Please login to continue </p>}
+
+            <CarPage/>
+            <StudentList/>
+            </>
+        )
+    }
+
+    ReactDOM.createRoot( document.getElementById("root")).render( <App/> )
+
+    </script>  
+</body>
+</html>
