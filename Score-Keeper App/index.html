@@ -26,24 +26,47 @@
     let score = 0;
     let wicket = 0;
 
+
+    // Function is called automatically on render,
+    // so for that we don't pass parentheses...
+    // we Just pass the reference of function... ( clickOne() -> call now )
+
+    // function clickOne(){
+    //     alert("1 is clicked");
+    // }
+
+    // function addOne(){
+    //    score = score + 1; 
+    //    rootElement.render( <App /> );
+    //    console.log("Score: ", score);
+    // }
+
+    function increaseScore(runs){
+        score += runs;
+        rootElement.render( <App /> );
+        console.log("Score: ", score);
+    }
+
     function App(){
         return(
             <>
             <h1> Score Keeper App </h1>
             <h3> Score {score}/{wicket} </h3>
+
             <div>
-            <button> 1 </button>
-            <button> 2 </button>
-            <button> 3 </button>
-            <button> 4 </button>
-            <button> 5 </button>
-            <button> 6 </button>
+            <button onClick = { () => increaseScore(1)}> 1 </button>
+            <button onClick = { () => increaseScore(2)}> 2 </button>
+            <button onClick = { () => increaseScore(3)}> 3 </button>
+            <button onClick = { () => increaseScore(4)}> 4 </button>
+            <button onClick = { () => increaseScore(5)}> 5 </button>
+            <button onClick = { () => increaseScore(6)}> 6 </button>
             </div>
             </>
         )
     }
 
-    ReactDOM.createRoot( document.getElementById("root") ).render( <App /> );
+    const rootElement = ReactDOM.createRoot( document.getElementById("root") )
+    rootElement.render( <App /> );
 
     </script>
     
