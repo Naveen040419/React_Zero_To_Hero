@@ -26,6 +26,7 @@
     let score = 0;
     let wicket = 0;
 
+    let ballWiseRes = [];
 
     // Function is called automatically on render,
     // so for that we don't pass parentheses...
@@ -42,9 +43,69 @@
     // }
 
     function increaseScore(runs){
-        score += runs;
-        rootElement.render( <App /> );
-        console.log("Score: ", score);
+        if( wicket < 10 ){
+
+            ballWiseRes.push(runs);
+            console.log("Ball wise results: ", ballWiseRes);
+
+            score += runs;
+            rootElement.render( <App /> );
+            console.log("Score: ", score);
+        }else{
+            alert("Game is over");
+        } 
+    }
+
+    function addWicket(){
+        if( wicket < 10 ){
+
+          ballWiseRes.push('W');
+          console.log("Ball wise results: ", ballWiseRes);
+
+          wicket = wicket+1;
+          rootElement.render( <App/>)
+        }else{ 
+            alert("Game is over");      
+        }  
+    }
+
+
+    // Creating a Component for the score buttons...
+
+    const ScoreButtons = () => {
+        return( 
+        <div>
+            <button onClick = { () => increaseScore(0)}> 0 </button>
+            <button onClick = { () => increaseScore(1)}> 1 </button>
+            <button onClick = { () => increaseScore(2)}> 2 </button>
+            <button onClick = { () => increaseScore(3)}> 3 </button>
+            <button onClick = { () => increaseScore(4)}> 4 </button>
+            <button onClick = { () => increaseScore(5)}> 5 </button>
+            <button onClick = { () => increaseScore(6)}> 6 </button>
+            <button onClick = { addWicket }> Wicket </button>
+        </div>
+     )
+    }
+
+
+    // New Thing is when we write {} inside component we used return statemnt
+    // but when we write () we don't use return statement...( implicit return )
+
+    // bcoz the falsy values -> null, 0, undefined, false and "" are not rendered.
+
+    const Result = () => {
+        return(
+            <div>
+        { 
+            ballWiseRes.map( (res, index) => (
+            <>   
+            { index % 6 == 0 && index!= 0 ? <br/> : null }
+            <span key = {index}> {res === 0 ? <strong> . </strong> : res } &nbsp; </span>
+            </>
+            ))   
+        }
+            </div>
+        )
     }
 
     function App(){
@@ -52,22 +113,15 @@
             <>
             <h1> Score Keeper App </h1>
             <h3> Score {score}/{wicket} </h3>
-
-            <div>
-            <button onClick = { () => increaseScore(1)}> 1 </button>
-            <button onClick = { () => increaseScore(2)}> 2 </button>
-            <button onClick = { () => increaseScore(3)}> 3 </button>
-            <button onClick = { () => increaseScore(4)}> 4 </button>
-            <button onClick = { () => increaseScore(5)}> 5 </button>
-            <button onClick = { () => increaseScore(6)}> 6 </button>
-            </div>
+            <ScoreButtons/>
+            <h2> Ball wise Results </h2>
+            <Result/>
             </>
         )
     }
 
     const rootElement = ReactDOM.createRoot( document.getElementById("root") )
     rootElement.render( <App /> );
-
     </script>
     
 </body>
