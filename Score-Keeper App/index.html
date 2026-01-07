@@ -28,6 +28,12 @@
 
     let ballWiseRes = [];
 
+    let hit = 0;
+
+    // We can access the dom element using ref in react...
+
+    let inputRef = React.createRef();
+
     // Function is called automatically on render,
     // so for that we don't pass parentheses...
     // we Just pass the reference of function... ( clickOne() -> call now )
@@ -45,13 +51,16 @@
     function increaseScore(runs){
         if( wicket < 10 ){
 
-            ballWiseRes.push(runs);
-            console.log("Ball wise results: ", ballWiseRes);
+            // ballWiseRes.push(runs);
+            // console.log("Ball wise results: ", ballWiseRes);
 
-            score += runs;
+            // score += runs;
+            // rootElement.render( <App /> );
+            // console.log("Score: ", score);
+
+            hit = runs;
             rootElement.render( <App /> );
-            console.log("Score: ", score);
-        }else{
+        } else{
             alert("Game is over");
         } 
     }
@@ -59,10 +68,13 @@
     function addWicket(){
         if( wicket < 10 ){
 
-          ballWiseRes.push('W');
-          console.log("Ball wise results: ", ballWiseRes);
+          // ballWiseRes.push('W');
+          // console.log("Ball wise results: ", ballWiseRes);
 
-          wicket = wicket+1;
+          // wicket = wicket+1;
+          // rootElement.render( <App/>)
+
+          hit = 'W';
           rootElement.render( <App/>)
         }else{ 
             alert("Game is over");      
@@ -93,20 +105,64 @@
 
     // bcoz the falsy values -> null, 0, undefined, false and "" are not rendered.
 
-    const Result = () => {
-        return(
-            <div>
-        { 
-            ballWiseRes.map( (res, index) => (
-            <>   
-            { index % 6 == 0 && index!= 0 ? <br/> : null }
-            <span key = {index}> {res === 0 ? <strong> . </strong> : res } &nbsp; </span>
-            </>
-            ))   
-        }
-            </div>
-        )
+    // condition ? (JSX) : (JSX)
+
+  //  const Result = () => {
+  //   return (
+  //   <div>
+  //     {ballWiseRes.map((res, index) => (
+
+  //       <React.Fragment key={index}>
+  //       {index % 6 === 0 && index !== 0 && <br />}
+  //         <span>
+  //           {res === 0 ? ( <strong>.</strong> ) : res === "W" ? (
+  //             <strong style={{ color: "red" }}>W</strong>
+  //           ) : ( res )}
+  //           &nbsp;
+  //         </span>
+  //       </React.Fragment>
+
+  //     ))}
+  //   </div>
+  //   );
+  //  };
+
+
+   // Forms in JSX...( button have internal property the page is reloaded )
+   // Html elements have internal properties...
+   // To avoid that we use event.preventDefault() method...
+   // or synthetic event in react...( wrapper around dom element event or browser event)
+
+   // ballWishes.unshift -> I want current commentary in first...
+
+   // info -> The createRef is uncontrolled component...
+   // It is not dependent on the react component, it is directly connected to the dom element...
+   // It is automatically updated by react when the dom element is changed...
+
+   function handleSubmit( event ){
+    event.preventDefault();
+    //  alert(" Form Submitted ");
+
+    if( hit == "W" ? wicket ++ : score += hit );
+
+    ballWiseRes.unshift(hit);
+    console.log(" Ball wise results: ", ballWiseRes);
+
+    hit = 0;
+    inputRef.current.value = "";
+
+    rootElement.render( <App/> )
     }
+
+  // ref for referencing dom element...
+
+   const Forms = () => (
+    <form onSubmit = { () => handleSubmit(event) } > 
+        <input value = {hit}/> 
+        <input ref = {inputRef} placeholder="Enter commentary" />
+        <button> Submit </button> 
+    </form>
+    )
 
     function App(){
         return(
@@ -114,8 +170,20 @@
             <h1> Score Keeper App </h1>
             <h3> Score {score}/{wicket} </h3>
             <ScoreButtons/>
+            <br/>
+            <Forms/>
+            <hr/>
             <h2> Ball wise Results </h2>
-            <Result/>
+
+            { ballWiseRes.map( (res, index) => (
+              <React.Fragment key={index}>
+
+              <span > {res} </span> &nbsp; &nbsp; &nbsp;
+              <span> {inputRef.current.value} </span> <br/>
+
+              </React.Fragment>
+            ))}
+  
             </>
         )
     }
